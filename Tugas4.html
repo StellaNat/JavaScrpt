@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas 4 - JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #E6E6FA; 
+        }
+        .container {
+            border: 2px solid black;
+            width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            text-align: left;
+            background-color: #D8BFD8; 
+            border-radius: 10px;
+        }
+        input {
+            width: 200px;
+            padding: 5px;
+            margin-bottom: 5px;
+            background-color: #E6E6FA;
+            border: 1px solid #fa93ff;
+            border-radius: 5px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 5px 20px;
+            background-color: #fa93ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #c762e5;
+        }
+    </style>
+</head>
+<body>
+    <img src="lala.jpg" alt="Lala" width="200px">
+    
+    <h2>Stella Natalia / 235314025</h2>
+    
+    <div class="container">
+        <label for="nama">Nama :</label>
+        <input type="text" id="nama" placeholder="Teks Nama"><br><br>
+        
+        <label for="jumlah">Jumlah Pilihan :</label>
+        <input type="number" id="jumlah" placeholder="Jmlh"><br><br>
+        
+        <button onclick="generateInputs()">OK</button>
+        
+        <div id="inputContainer"></div>
+    </div>
+
+    <script>
+        function generateInputs() {
+            let nama = document.getElementById("nama").value;
+            let jumlah = document.getElementById("jumlah").value;
+            let inputContainer = document.getElementById("inputContainer");
+            inputContainer.innerHTML = "";
+            
+            if (nama === "" || jumlah === "") {
+                alert("Harap isi semua kolom!");
+                return;
+            }
+            
+            for (let i = 1; i <= jumlah; i++) {
+                let label = document.createElement("label");
+                label.innerText = "Pilihan " + i + " : ";
+                let input = document.createElement("input");
+                input.type = "text";
+                input.placeholder = "Teks Pilihan " + i;
+                input.style.backgroundColor = "#E6E6FA";
+                input.style.border = "1px solid #9370DB";
+                input.style.borderRadius = "5px";
+                inputContainer.appendChild(label);
+                inputContainer.appendChild(input);
+                inputContainer.appendChild(document.createElement("br"));
+            }
+            
+            let submitButton = document.createElement("button");
+            submitButton.innerText = "OK";
+            submitButton.style.backgroundColor = "#9370DB";
+            submitButton.style.color = "white";
+            submitButton.style.border = "none";
+            submitButton.style.borderRadius = "5px";
+            submitButton.style.cursor = "pointer";
+            submitButton.onclick = function() {
+                let pilihanValues = [];
+                let inputs = inputContainer.getElementsByTagName("input");
+                for (let input of inputs) {
+                    pilihanValues.push(input.value);
+                }
+                alert("Nama: " + nama + "\nPilihan: " + pilihanValues.join(", "));
+            };
+            inputContainer.appendChild(document.createElement("br"));
+            inputContainer.appendChild(submitButton);
+        }
+    </script>
+</body>
+</html>
